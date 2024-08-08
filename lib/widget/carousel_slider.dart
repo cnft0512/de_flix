@@ -23,7 +23,7 @@ class _CarouselImageState extends State<CarouselImage> {
   void initState() {
     super.initState();
     movies = widget.movies;
-    images = movies?.map((m) => Image.asset('./images/' + m.poster)).toList();
+    images = movies?.map((m) => Image.network(m.poster)).toList();
     keywords = movies?.map((m) => m.keyword).toList();
     likes = movies?.map((m) => m.like).toList();
     _currentKeyword = keywords![0];
@@ -64,8 +64,21 @@ class _CarouselImageState extends State<CarouselImage> {
                     children: <Widget>[
                       likes![_currentPage]
                           ? IconButton(
-                              onPressed: () {}, icon: Icon(Icons.check))
-                          : IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+                              onPressed: () {
+                                // setState(() {
+                                //   likes?[_currentPage] = !likes![_currentPage];
+                                //   movies?[_currentPage].reference.updateData(
+                                //       {'like': likes![_currentPage]});
+                                // });
+                              },
+                              icon: Icon(Icons.check),
+                            )
+                          : IconButton(
+                              onPressed: () {
+                                setState(() {});
+                              },
+                              icon: Icon(Icons.add),
+                            ),
                       Text(
                         'My Likes',
                         style: TextStyle(fontSize: 11),
@@ -102,14 +115,12 @@ class _CarouselImageState extends State<CarouselImage> {
                         icon: Icon(Icons.info),
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute<Null>(
-                            fullscreenDialog: true,
-                            builder: (BuildContext context) {
-                              return DetailScreen(
-                                movie: movies![_currentPage],
-
-                              );
-                            })
-                          );
+                              fullscreenDialog: true,
+                              builder: (BuildContext context) {
+                                return DetailScreen(
+                                  movie: movies![_currentPage],
+                                );
+                              }));
                         },
                       ),
                       Text(
