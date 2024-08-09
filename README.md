@@ -1,3 +1,3 @@
 # de_flix
-cloning netflix
-with Andriod studio
+cloning netflix <br />
+with Android studio
